@@ -25,7 +25,6 @@ router.post('/items/create', async (req, res, next) => {
 
 router.get('/items/:itemId', async (req, res, next) => {
   const { itemId } = req.params;
-  const items = await Item.find();
 
   await Video.findById({ _id: itemId }, (error, item) => {
     if (error) res.redirect('/');
