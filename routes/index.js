@@ -7,11 +7,11 @@ router.get('/', async (req, res) => {
   res.render('index', { items });
 });
 
-router.get('/items/create', (req, res, next) => {
+router.get('/items/create', (req, res) => {
   res.render('create');
 });
 
-router.post('/items/create', async (req, res, next) => {
+router.post('/items/create', async (req, res) => {
   const { title, description, imageUrl } = req.body;
   const newItem = new Item({ title, description, imageUrl });
   newItem.validateSync();
@@ -23,7 +23,7 @@ router.post('/items/create', async (req, res, next) => {
   }
 });
 
-router.get('/items/:itemId', async (req, res, next) => {
+router.get('/items/:itemId', async (req, res) => {
   const { itemId } = req.params;
 
   await Video.findById({ _id: itemId }, (error, item) => {
