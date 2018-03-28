@@ -27,11 +27,12 @@ router.get('/items/:itemId', async (req, res, next) => {
   const { itemId } = req.params;
   const items = await Item.find();
 
-  if (!items) {
-    res.redirect('/');
-  } else {
-    res.render('single-item', { item: items.filter((item) => item._id.toString() === itemId)[0] });
-  }
+  await Video.findById({ _id: itemId }, (error, item) => {
+    if (error) res.redirect('/');
+
+    res.render('single-item', { item });
+  });
+
 });
 
 module.exports = router;
